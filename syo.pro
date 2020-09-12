@@ -10,5 +10,4 @@ SOURCES += \
         test/test.cpp
 
 HEADERS += \
-    include/Vector \
     include/vector.h

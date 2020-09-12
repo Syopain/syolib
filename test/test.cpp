@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "Vector"
+#include "vector.h"
 
 using namespace syo;
 
@@ -50,6 +50,7 @@ static void test_constructor()
 
 static void test_alter()
 {
+
     Vector<int> ivec;
     for (size_t i = 0; i != 24; ++i) {
         ivec.push_back(i);
