@@ -79,35 +79,75 @@ static void test_alter()
     }
 }
 
-static void houseword()
+static void exercise_2()
 {
     using std::cout;
     using std::endl;
 
+    cout << "Exercise_2:" << endl << endl;
+
     Vector<int> ivec = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     cout << "Original ArrayList: \n";
 
-    cout << "Array List: ";
-    for (size_t i = 0; i < ivec.size(); ++i) {
-        cout << ivec[i] << ' ';
-    }
-    cout << endl << endl;
+    cout << "Array List: " << ivec << endl << endl;;
 
     cout << "Insert 3 elements at index 4: \n";
     ivec.insert(4, 3, 15);
-    cout << "Array List: ";
-    for (size_t i = 0; i < ivec.size(); ++i) {
-        cout << ivec[i] << ' ';
-    }
-    cout << endl << endl;
+    cout << "Array List: " << ivec << endl << endl;
 
     cout << "Remove 2 elements at index 3: \n";
     ivec.remove(3, 2);
-    cout << "Array List: ";
-    for (size_t i = 0; i < ivec.size(); ++i) {
-        cout << ivec[i] << ' ';
-    }
-    cout << endl << endl;
+    cout << "Array List: " << ivec << endl << endl;
+}
+
+static void exercise_3_1()
+{
+    using std::cout;
+    using std::endl;
+
+    cout << "Exercise_3_1:" << endl << endl;
+
+    Vector<int> ivec;
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 10: \n";
+    ivec.insert_in_order(10);
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 3: \n";
+    ivec.insert_in_order(3);
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 7: \n";
+    ivec.insert_in_order(7);
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 1: \n";
+    ivec.insert_in_order(1);
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 5: \n";
+    ivec.insert_in_order(5);
+    cout << "Array List: " << ivec << endl << endl;
+
+    cout << "Insert 4: \n";
+    ivec.insert_in_order(4);
+    cout << "Array List: " << ivec << endl << endl;
+}
+
+static void exercise_3_2()
+{
+    using std::cout;
+    using std::endl;
+
+    cout << "Exercise_3_2:" << endl << endl;
+
+    Vector<int> ivec = {1, -1, 3, 4, -3, 5, -6, -2, 9, -3};
+    cout << "Original ArrayList: \n" << ivec << endl << endl;
+
+    ivec.sort_by_sign();
+    cout << "Called sort_by_sign(): \n" << ivec << endl << endl;
+
 }
 
 int main()
@@ -115,7 +155,8 @@ int main()
     test_constructor();
     test_alter();
 
-    houseword();
+    exercise_3_1();
+    exercise_3_2();
 
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     return main_ret;

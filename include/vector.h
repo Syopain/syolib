@@ -37,8 +37,13 @@ namespace syo {
         void push_back(const T &val);
         void pop_back();
         void insert(size_type index, size_type num, const T &val);
+        void insert(size_type index, const T &val) { insert(index, 1, val); }
         void remove(size_type index, size_type num);
         void reserve( size_type size);
+
+        //extension member function:
+        void insert_in_order(const T &val);   //将value插入到第一个大于它的元素之前
+        void sort_by_sign();    //将所有负数元素移到所有正数元素之前
 
     private:
         T *p_arr_ = nullptr;
@@ -60,161 +65,13 @@ namespace syo {
         }
     };
 
-    template <typename T>
-    Vector<T>::Vector(size_type size, const T &val) :
-        size_(size),
-        capacity_(size)
-    {
-        if (size > 0) {
-            p_arr_ = new T[capacity_] {};
-            if(val != T{})
-                for(size_type i = 0; i < size_; ++i) {
-                    p_arr_[i] = val;
-                }
-        }
-    }
+    //non-member function:
 
     template <typename T>
-    Vector<T>::Vector(const Vector<T> &from) :
-        size_(from.size_),
-        capacity_(from.capacity_)
-    {
-        copy(from);
-    }
+    std::ostream& operator<<(std::ostream &os, const Vector<T> &vec);
 
-    template <typename T>
-    Vector<T>::Vector(initializer_list<T> il) :
-        size_(il.size()),
-        capacity_(il.size())
-    {
-        p_arr_ = new T[capacity_] {};
-        auto p = p_arr_;
-        for (const auto &elem : il) {
-            *p++ = elem;
-        }
-    }
-
-    template <typename T>
-    Vector<T>::~Vector()
-    {
-        delete [] p_arr_;
-        p_arr_ = nullptr;
-    }
-
-    template <typename T>
-    Vector<T>& Vector<T>::operator=(const Vector<T> &from)
-    {
-        if (p_arr_ != from.p_arr_) {
-            size_ = from.size_;
-            capacity_ = from.capacity_;
-            copy(from);
-        }
-        return *this;
-    }
-
-    template <typename T>
-    T& Vector<T>::at(size_type index)
-    {
-        check(index, "range of out on at()!");
-        return p_arr_[index];
-    }
-
-    template <typename T>
-    const T& Vector<T>::at(size_type index) const
-    {
-        check(index, "range of out on at()!");
-        return p_arr_[index];
-    }
-
-    template <typename T>
-    T& Vector<T>::front()
-    {
-        check(0, "front() on empty Vector!");
-        return p_arr_[0];
-    }
-
-    template <typename T>
-    const T& Vector<T>::front() const {
-        check(0, "front() on empty Vector!");
-        return p_arr_[0];
-    }
-
-    template <typename T>
-    T& Vector<T>::back()
-    {
-        check(0, "back() on empty Vector!");
-        return p_arr_[size_ - 1];
-    }
-
-    template <typename T>
-    const T& Vector<T>::back() const
-    {
-        check(0, "back() on empty Vector!");
-        return p_arr_[size_ - 1];
-    }
-
-    template <typename T>
-    void Vector<T>::push_back(const T &val)
-    {
-        reserve(size() + 1);
-        p_arr_[size_++] = val;
-    }
-
-    template <typename T>
-    void Vector<T>::pop_back()
-    {
-        check(0, "pop_back() on empty Vector!");
-        --size_;
-    }
-
-    template <typename T>
-    void Vector<T>::insert(size_type index, size_type num, const T &val)
-    {
-        reserve(size() + num);
-        size_ += num;
-        for (auto i = size() - 1; i >= index + num; --i) {
-            p_arr_[i] = p_arr_[i - num];
-        }
-        for (auto i = index; i != index + num; ++i) {
-            p_arr_[i] = val;
-        }
-    }
-
-    template <typename T>
-    void Vector<T>::remove(size_type index, size_type num)
-    {
-        check(num, "remove() on Vector that too small!");
-        size_ -= num;
-        for (auto i = index; i < size(); ++i) {
-            p_arr_[i] = p_arr_[i + num];
-        }
-    }
-
-    template <typename T>
-    void Vector<T>::reserve(size_type size)
-    {
-        if (capacity_ >= size)
-            return;
-
-        if (capacity_ < MINSIZE) capacity_ = MINSIZE;
-
-        int multiple = 2;
-        while (multiple * capacity_ < size)
-            multiple *= 2;
-        expand_capacity(multiple);
-    }
-
-    template<typename T>
-    void Vector<T>::expand_capacity(int multiple)
-    {
-        capacity_ *= multiple;
-        auto delp = p_arr_;
-        p_arr_ = new T[capacity_] {};
-        for (size_type i = 0; i != size(); ++i) {
-            p_arr_[i] = delp[i];
-        }
-        delete [] delp;
-    }
 }
+
+#include "vector.hpp"
 
 #endif // VECTOR_H

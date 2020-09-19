@@ -7,7 +7,10 @@ INCLUDEPATH += \
         include
 
 SOURCES += \
+        source/big_integer.cpp \
         test/test.cpp
 
 HEADERS += \
-    include/vector.h
+    include/big_integer.h \
+    include/vector.h \
+    include/vector.hpp
