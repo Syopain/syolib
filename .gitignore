@@ -1,3 +1,6 @@
+# editor backup
+*.bak
+
 # project output
 *.db
 
