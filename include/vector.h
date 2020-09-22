@@ -50,7 +50,6 @@ namespace syo {
         size_type size_ = 0;
         size_type capacity_ = 0;
 
-        void expand_capacity(int multiple);
         void check(size_type i, const string &msg) const
         {
             if(i < 0 || i >= size_) throw std::out_of_range(msg);

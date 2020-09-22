@@ -143,17 +143,23 @@ namespace syo {
 
         if (capacity_ < MINSIZE) capacity_ = MINSIZE;
 
-        int multiple = 2;
-        while (multiple * capacity_ < size)
-            multiple *= 2;
-        expand_capacity(multiple);
+        int multiple = 1;
+        while (multiple * capacity_ < size)  multiple *= 2;
+
+        capacity_ *= multiple;
+        auto delp = p_arr_;
+        p_arr_ = new T[capacity_] {};
+        for (size_type i = 0; i != size_; ++i) {
+            p_arr_[i] = delp[i];
+        }
+        delete [] delp;
     }
 
     template<typename T>
     void Vector<T>::insert_in_order(const T &val)
     {
         size_type index = 0;
-        while (index != size() && val > p_arr_[index]) {
+        while (index != size() && p_arr_[index] < val) {
             ++index;
         }
         insert(index, val);
@@ -171,18 +177,6 @@ namespace syo {
                 std::swap(*left, *right);
             }
         }
-    }
-
-    template<typename T>
-    inline void Vector<T>::expand_capacity(int multiple)
-    {
-        capacity_ *= multiple;
-        auto delp = p_arr_;
-        p_arr_ = new T[capacity_] {};
-        for (size_type i = 0; i != size(); ++i) {
-            p_arr_[i] = delp[i];
-        }
-        delete [] delp;
     }
 
     //non-member function:
