@@ -1,12 +1,11 @@
 ﻿#ifndef VECTOR_HPP
 #define VECTOR_HPP
-
 #include "vector.h"
 
 namespace syo {
 
     template <typename T>
-    Vector<T>::Vector(size_type size, const T &val) :
+    Vector<T>::Vector(size_type size, const T& val) :
         size_(size),
         capacity_(size)
     {
@@ -20,7 +19,7 @@ namespace syo {
     }
 
     template <typename T>
-    Vector<T>::Vector(const Vector<T> &from) :
+    Vector<T>::Vector(const Vector<T>& from) :
         size_(from.size_),
         capacity_(from.capacity_)
     {
@@ -34,7 +33,7 @@ namespace syo {
     {
         p_arr_ = new T[capacity_] {};
         auto p = p_arr_;
-        for (const auto &elem : il) {
+        for (const auto& elem : il) {
             *p++ = elem;
         }
     }
@@ -47,7 +46,7 @@ namespace syo {
     }
 
     template <typename T>
-    inline Vector<T>& Vector<T>::operator=(const Vector<T> &from)
+    inline Vector<T>& Vector<T>::operator=(const Vector<T>& from)
     {
         if (p_arr_ != from.p_arr_) {
             size_ = from.size_;
@@ -99,7 +98,7 @@ namespace syo {
     }
 
     template <typename T>
-    inline void Vector<T>::push_back(const T &val)
+    inline void Vector<T>::push_back(const T& val)
     {
         reserve(size() + 1);
         p_arr_[size_++] = val;
@@ -113,7 +112,7 @@ namespace syo {
     }
 
     template <typename T>
-    inline void Vector<T>::insert(size_type index, size_type num, const T &val)
+    inline void Vector<T>::insert(size_type index, size_type num, const T& val)
     {
         reserve(size() + num);
         size_ += num;
@@ -156,7 +155,7 @@ namespace syo {
     }
 
     template<typename T>
-    void Vector<T>::insert_in_order(const T &val)
+    void Vector<T>::insert_in_order(const T& val)
     {
         size_type index = 0;
         while (index != size() && p_arr_[index] < val) {
@@ -182,7 +181,7 @@ namespace syo {
     //non-member function:
 
     template <typename T>
-    std::ostream& operator<<(std::ostream &os, const Vector<T> &vec)
+    std::ostream& operator<<(std::ostream& os, const Vector<T>& vec)
     {
         for (size_t i = 0; i < vec.size(); ++i) {
             os << vec[i] << ' ';

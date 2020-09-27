@@ -12,5 +12,7 @@ SOURCES += \
 
 HEADERS += \
     include/big_integer.h \
+    include/forward_list.h \
+    include/forward_list.hpp \
     include/vector.h \
     include/vector.hpp
