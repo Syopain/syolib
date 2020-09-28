@@ -1,5 +1,7 @@
 ﻿#include <iostream>
+#include <cassert>
 #include "vector.h"
+#include "forward_list.h"
 
 using namespace syo;
 
@@ -18,7 +20,7 @@ static int test_pass = 0;
         }\
     } while(0)
 
-static void test_constructor()
+static void test_vector_constructor()
 {
     Vector<int> ivec;
     EXPECT_EQ_BASE(0, ivec.size());
@@ -48,7 +50,7 @@ static void test_constructor()
     }
 }
 
-static void test_alter()
+static void test_vector_alter()
 {
 
     Vector<int> ivec;
@@ -77,6 +79,55 @@ static void test_alter()
     for (size_t i = 0; i < ivec.size(); ++i) {
         EXPECT_EQ_BASE(static_cast<int>(i), ivec[i]);
     }
+}
+
+static void test_vector()
+{
+    test_vector_constructor();
+    test_vector_alter();
+}
+
+static void test_forward_list_constructor()
+{
+    ForwardList<int> lst;
+    EXPECT_EQ_BASE(0, lst.length());
+
+    lst = ForwardList<int> (12, 15);
+    EXPECT_EQ_BASE(12, lst.length());
+    auto iter = lst.begin();
+    for (int i = 0; i < 12; ++i) {
+        EXPECT_EQ_BASE(15, *iter++);
+        EXPECT_EQ_BASE(15, lst[i]);
+    }
+    assert(lst.end() == iter);
+
+    lst = ForwardList<int> (10);
+    EXPECT_EQ_BASE(10, lst.length());
+    iter = lst.begin();
+    for (int i = 0; i < 10; ++i) {
+        EXPECT_EQ_BASE(0, *iter++);
+        EXPECT_EQ_BASE(0, lst[i]);
+    }
+    assert(lst.end() == iter);
+
+    lst = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    EXPECT_EQ_BASE(10, lst.length());
+    iter = lst.begin();
+    for (int i = 0; i < 10; ++i) {
+        EXPECT_EQ_BASE(i, *iter++);
+        EXPECT_EQ_BASE(i, lst[i]);
+    }
+    assert(lst.end() == iter);
+}
+
+static void test_forward_list_alter()
+{
+
+}
+
+static void test_forward_list()
+{
+    test_forward_list_constructor();
 }
 
 static void exercise_2()
@@ -150,14 +201,41 @@ static void exercise_3_2()
 
 }
 
+static void exercise_4_1()
+{
+    using std::cout;
+    using std::endl;
+
+    cout << "Exercise_4_1:" << endl << endl;
+
+    ForwardList<int> lst = {9, 3, 5, 4, 8, 5, 2, 5, 6};
+    cout << "Array List: " << lst << endl << endl;
+
+    cout << "List Length: " << lst.length() << endl << endl;
+
+    for (auto item : {5, 12, 15}) {
+        if (lst.index_of(item) >= 0)
+            cout << "The first " << item << " appears in: " << lst.index_of(item)  << endl << endl;
+        else
+            cout << "The first " << item << " appears in: Not found!"  << endl << endl;
+    }
+
+    cout << "Index 4: " << lst[4] << endl << endl;
+}
+
+static void exercise_4_2()
+{
+
+}
+
 int main()
 {
-    test_constructor();
-    test_alter();
+    test_vector();
+    test_forward_list();
 
-    exercise_3_1();
-    exercise_3_2();
+    exercise_4_1();
+    exercise_4_2();
 
-    printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
+    printf("test: %d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     return main_ret;
 }

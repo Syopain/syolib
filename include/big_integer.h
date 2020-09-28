@@ -5,6 +5,7 @@
 #include <string>
 
 namespace syo {
+
     class BigInteger{
     public:
         static const int WIDTH = 8;

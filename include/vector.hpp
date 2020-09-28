@@ -167,8 +167,8 @@ namespace syo {
     template<typename T>
     void Vector<T>::sort_by_sign()
     {
-        T *left = p_arr_;
-        T *right = p_arr_ + size() - 1;
+        T* left = p_arr_;
+        T* right = p_arr_ + size() - 1;
         while (left < right) {
             while (*left <= 0) left++;
             while (*right >= 0) right--;
@@ -184,7 +184,7 @@ namespace syo {
     std::ostream& operator<<(std::ostream& os, const Vector<T>& vec)
     {
         for (size_t i = 0; i < vec.size(); ++i) {
-            os << vec[i] << ' ';
+            os << vec[i] << " ";
         }
         return os;
     }

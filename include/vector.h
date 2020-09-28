@@ -23,8 +23,8 @@ namespace syo {
 
         T& operator[](size_type index) { return *(p_arr_+ index ); }
         const T& operator[](size_type index) const { return *(p_arr_ + index); }
-        T& at(size_type loc);
-        const T& at(size_type loc) const;
+        T& at(size_type index);
+        const T& at(size_type index) const;
         T& back();
         const T& back() const;
         size_type capacity() const { return capacity_; }
@@ -46,7 +46,7 @@ namespace syo {
         void sort_by_sign();    //将所有负数元素移到所有正数元素之前
 
     private:
-        T *p_arr_ = nullptr;
+        T* p_arr_ = nullptr;
         size_type size_ = 0;
         size_type capacity_ = 0;
 
@@ -72,5 +72,4 @@ namespace syo {
 }
 
 #include "vector.hpp"
-
 #endif // VECTOR_H
