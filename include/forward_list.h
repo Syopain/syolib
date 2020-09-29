@@ -29,14 +29,17 @@ namespace syo {
         T& operator[](size_type index);
         const T& operator[](size_type index) const;
         iterator begin() const { return iterator(head_->next); }
-        iterator end() const { return iterator(tail_->next); }
+        iterator end() const { return iterator(); }
         size_type length() const;
         int index_of(const T& value) const;
+        iterator insert(iterator pos, const T& value);
+        iterator insert_after(iterator pos, const T& value);
+        iterator erase(iterator pos);
+        iterator erase_after(iterator pos);
 
         void reverse();
     private:
         std::shared_ptr<ListNode<T>> head_;
-        std::shared_ptr<ListNode<T>> tail_;
 
         void copy(const ForwardList<T>& from);
 
@@ -54,6 +57,7 @@ namespace syo {
 
     private:
         std::shared_ptr<ListNode<T>> ptr_;
+        friend class ForwardList;
 /*
         friend bool operator==(const iterator& lhs, const iterator& rhs);
         friend bool operator!=(const iterator& lhs, const iterator& rhs);

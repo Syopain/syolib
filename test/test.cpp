@@ -122,12 +122,27 @@ static void test_forward_list_constructor()
 
 static void test_forward_list_alter()
 {
+    ForwardList<int> lst;
+    EXPECT_EQ_BASE(0, lst.length());
 
+    auto iter = lst.end();
+    for (int i = 0; i < 10; ++i) {
+        lst.insert(iter, i);
+        EXPECT_EQ_BASE(i, lst[i]);
+        EXPECT_EQ_BASE(i + 1, static_cast<int>(lst.length()));
+    }
+
+    for (int i = 0; i < 9; ++i) {
+        lst.erase(lst.begin());
+        EXPECT_EQ_BASE(9 - i, static_cast<int>(lst.length()));
+        EXPECT_EQ_BASE(i + 1, *lst.begin());
+    }
 }
 
 static void test_forward_list()
 {
     test_forward_list_constructor();
+    test_forward_list_alter();
 }
 
 static void exercise_2()
@@ -225,6 +240,20 @@ static void exercise_4_1()
 
 static void exercise_4_2()
 {
+    using std::cout;
+    using std::endl;
+
+    cout << "Exercise_4_2:" << endl << endl;
+
+    ForwardList<int> lst = {9, 3, 5, 4, 8, 5, 2, 5, 6};
+
+    cout << "Before Reverse" << endl << endl;
+    cout << "Array List: " << lst << endl << endl;
+
+    lst.reverse();
+
+    cout << "After Reverse" << endl << endl;
+    cout << "Array List: " << lst << endl << endl;
 
 }
 
