@@ -5,7 +5,7 @@
 namespace syo {
 
 
-    BigInteger::BigInteger(const std::string &str)
+    BigInteger::BigInteger(std::string const& str)
     {
         long long begin = 0, end = str.length();
         if(str[0] == '-'){
@@ -17,7 +17,7 @@ namespace syo {
             auto subEnd = end - i * WIDTH;
             auto subBegin = std::max(begin, subEnd - WIDTH);
             auto val = std::stol(str.substr(subBegin, subEnd - subBegin));
-            sscanf(str.substr(subBegin, subEnd - subBegin).c_str(), "%d", &val);
+            sscanf(str.substr(subBegin, subEnd - subBegin).c_str(), "%ld", &val);
             number.push_back(val);
         }
         carry_bit();
@@ -35,7 +35,7 @@ namespace syo {
         }
     }
 
-    BigInteger &BigInteger::operator+=(const BigInteger &rhs)
+    BigInteger &BigInteger::operator+=(BigInteger const& rhs)
     {
         if(rhs.is_negative())
             return *this -= -rhs;
@@ -50,7 +50,7 @@ namespace syo {
         return *this;
     }
 
-    BigInteger &BigInteger::operator-=(const BigInteger &rhs)
+    BigInteger &BigInteger::operator-=(BigInteger const& rhs)
     {
         if(rhs.is_negative())
             return *this += -rhs;
@@ -66,17 +66,17 @@ namespace syo {
         return *this;
     }
 
-    BigInteger &BigInteger::operator*=(const BigInteger &rhs)
+    BigInteger &BigInteger::operator*=(BigInteger const& rhs)
     {
         return *this = *this * rhs;
     }
 
-    BigInteger &BigInteger::operator/=(const BigInteger &rhs)
+    BigInteger &BigInteger::operator/=(BigInteger const& rhs)
     {
         return *this = *this / rhs;
     }
 
-    BigInteger &BigInteger::operator%=(const BigInteger &rhs)
+    BigInteger &BigInteger::operator%=(BigInteger const& rhs)
     {
         return *this = *this % rhs;
     }
@@ -120,13 +120,13 @@ namespace syo {
             number.pop_back();
     }
 
-    BigInteger operator+(const BigInteger &lhs, const BigInteger &rhs)
+    BigInteger operator+(BigInteger const& lhs, BigInteger const& rhs)
     {
         BigInteger ret(lhs);
         ret += rhs;
         return ret;
     }
-    BigInteger operator-(const BigInteger &lhs, const BigInteger &rhs)
+    BigInteger operator-(BigInteger const& lhs, BigInteger const& rhs)
     {
         if(lhs < rhs)
             return -(rhs - lhs);
@@ -134,7 +134,7 @@ namespace syo {
         ret -= rhs;
         return ret;
     }
-    BigInteger operator*(const BigInteger &lhs, const BigInteger &rhs)
+    BigInteger operator*(BigInteger const& lhs, BigInteger const& rhs)
     {
         BigInteger ret;
         ret.number.resize(lhs.size() + rhs.size());
@@ -148,7 +148,7 @@ namespace syo {
         ret.carry_bit();
         return ret;
     }
-    BigInteger operator/(const BigInteger &lhs, const BigInteger &rhs)
+    BigInteger operator/(BigInteger const& lhs, BigInteger const& rhs)
     {
         BigInteger begin, end, step(1);
 
@@ -166,12 +166,12 @@ namespace syo {
             step = 1;
         }
     }
-    BigInteger operator%(const BigInteger &lhs, const BigInteger &rhs)
+    BigInteger operator%(BigInteger const& lhs, BigInteger const& rhs)
     {
         return lhs - lhs/rhs * rhs;
     }
 
-    bool operator<(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator<(BigInteger const& lhs, BigInteger const& rhs)
     {
         if(lhs.size() != rhs.size())
             return lhs.size() < rhs.size();
@@ -181,23 +181,23 @@ namespace syo {
         }
         return false;
     }
-    bool operator>(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator>(BigInteger const& lhs, BigInteger const& rhs)
     {
         return rhs < lhs;
     }
-    bool operator<=(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator<=(BigInteger const& lhs, BigInteger const& rhs)
     {
         return !(lhs > rhs);
     }
-    bool operator>=(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator>=(BigInteger const& lhs, BigInteger const& rhs)
     {
         return !(lhs < rhs);
     }
-    bool operator==(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator==(BigInteger const& lhs, BigInteger const& rhs)
     {
-        return !(lhs < rhs) && !(lhs > rhs);
+        return !(lhs < rhs) && !(lhs > rhs)           ;
     }
-    bool operator!=(const BigInteger &lhs, const BigInteger &rhs)
+    bool operator!=(BigInteger const& lhs, BigInteger const& rhs)
     {
         return lhs < rhs || lhs > rhs;
     }
@@ -209,7 +209,7 @@ namespace syo {
             num = input;
         return is;
     }
-    std::ostream &operator<<(std::ostream &os, const BigInteger &num)
+    std::ostream &operator<<(std::ostream &os, BigInteger const& num)
     {
         if(num.number.empty()){
             os << 0;
@@ -220,7 +220,7 @@ namespace syo {
         os << num.number.back();
         for(long long i = num.size() - 2; i >= 0; --i){
             char buf[BigInteger::WIDTH+1];
-            std::sprintf(buf, "%08ld", num[i]);
+            std::sprintf(buf, "%08lld", num[i]);
             buf[BigInteger::WIDTH] = 0;
             std::string output(buf);
             os << output;

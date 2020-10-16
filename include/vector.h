@@ -6,9 +6,6 @@
 
 namespace syo {
 
-    using std::initializer_list;
-    using std::string;
-
     template <typename T> class Vector {
     public:
         using size_type = unsigned long long;
@@ -17,7 +14,7 @@ namespace syo {
         Vector() = default;
         Vector(const Vector<T>& from);
         Vector(size_type size, const T& val = T{});
-        Vector(initializer_list<T> il);
+        Vector(std::initializer_list<T> il);
         Vector& operator=(const Vector& from);
         ~Vector();
 
@@ -50,7 +47,7 @@ namespace syo {
         size_type size_ = 0;
         size_type capacity_ = 0;
 
-        void check(size_type i, const string& msg) const
+        void check(size_type i, const std::string& msg) const
         {
             if(i < 0 || i >= size_) throw std::out_of_range(msg);
         }

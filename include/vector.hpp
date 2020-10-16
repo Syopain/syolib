@@ -27,7 +27,7 @@ namespace syo {
     }
 
     template <typename T>
-    Vector<T>::Vector(initializer_list<T> il) :
+    Vector<T>::Vector(std::initializer_list<T> il) :
         size_(il.size()),
         capacity_(il.size())
     {

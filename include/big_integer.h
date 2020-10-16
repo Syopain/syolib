@@ -8,8 +8,8 @@ namespace syo {
 
     class BigInteger{
     public:
-        static const int WIDTH = 8;
-        static const int BASE = 100000000;
+        static int const WIDTH = 8;
+        static int const BASE = 100000000;
         std::vector<long long> number;
         bool negative = 0;
 
@@ -19,8 +19,8 @@ namespace syo {
         using sz = std::vector<long long>::size_type;
         BigInteger() = default;
         BigInteger(long long val);
-        BigInteger(const std::string &str);
-        BigInteger(const char *str) { *this = std::string(str); }
+        BigInteger(std::string const& str);
+        BigInteger(char const* str) { *this = std::string(str); }
         bool is_negative() const { return negative; }
         BigInteger abs(){
             if(is_negative())
@@ -33,20 +33,20 @@ namespace syo {
             return number.size();
         }
 
-        BigInteger &operator+=(const BigInteger &rhs);
-        BigInteger &operator-=(const BigInteger &rhs);
-        BigInteger &operator*=(const BigInteger &rhs);
-        BigInteger &operator/=(const BigInteger &rhs);
-        BigInteger &operator%=(const BigInteger &rhs);
+        BigInteger &operator+=(BigInteger const& rhs);
+        BigInteger &operator-=(BigInteger const& rhs);
+        BigInteger &operator*=(BigInteger const& rhs);
+        BigInteger &operator/=(BigInteger const& rhs);
+        BigInteger &operator%=(BigInteger const& rhs);
         BigInteger &operator++();
         BigInteger &operator--();
         BigInteger operator++(int);
         BigInteger operator--(int);
-        long long &operator[](const sz sub)
+        long long &operator[](sz sub)
         {
             return number[sub];
         }
-        const long long &operator[](const sz sub) const
+        const long long &operator[](sz sub) const
         {
             return number[sub];
         }
@@ -62,35 +62,35 @@ namespace syo {
             return ret;
         }
 
-        friend BigInteger operator+(const BigInteger &lhs, const BigInteger &rhs);
-        friend BigInteger operator-(const BigInteger &lhs, const BigInteger &rhs);
-        friend BigInteger operator*(const BigInteger &lhs, const BigInteger &rhs);
-        friend BigInteger operator/(const BigInteger &lhs, const BigInteger &rhs);
-        friend BigInteger operator%(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator<(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator>(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator<=(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator>=(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator==(const BigInteger &lhs, const BigInteger &rhs);
-        friend bool operator!=(const BigInteger &lhs, const BigInteger &rhs);
+        friend BigInteger operator+(BigInteger const& lhs, BigInteger const& rhs);
+        friend BigInteger operator-(BigInteger const& lhs, BigInteger const& rhs);
+        friend BigInteger operator*(BigInteger const& lhs, BigInteger const& rhs);
+        friend BigInteger operator/(BigInteger const& lhs, BigInteger const& rhs);
+        friend BigInteger operator%(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator<(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator>(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator<=(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator>=(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator==(BigInteger const& lhs, BigInteger const& rhs);
+        friend bool operator!=(BigInteger const& lhs, BigInteger const& rhs);
         friend std::istream &operator>>(std::istream &is, BigInteger &num);
-        friend std::ostream &operator<<(std::ostream &os, const BigInteger &num);
+        friend std::ostream &operator<<(std::ostream &os, BigInteger const& num);
     };
 
-    BigInteger operator+(const BigInteger &lhs, const BigInteger &rhs);
-    BigInteger operator-(const BigInteger &lhs, const BigInteger &rhs);
-    BigInteger operator*(const BigInteger &lhs, const BigInteger &rhs);
-    BigInteger operator/(const BigInteger &lhs, const BigInteger &rhs);
-    BigInteger operator%(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator<(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator>(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator<=(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator>=(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator==(const BigInteger &lhs, const BigInteger &rhs);
-    bool operator!=(const BigInteger &lhs, const BigInteger &rhs);
+    BigInteger operator+(BigInteger const& lhs, BigInteger const& rhs);
+    BigInteger operator-(BigInteger const& lhs, BigInteger const& rhs);
+    BigInteger operator*(BigInteger const& lhs, BigInteger const& rhs);
+    BigInteger operator/(BigInteger const& lhs, BigInteger const& rhs);
+    BigInteger operator%(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator<(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator>(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator<=(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator>=(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator==(BigInteger const& lhs, BigInteger const& rhs);
+    bool operator!=(BigInteger const& lhs, BigInteger const& rhs);
     std::istream &operator>>(std::istream &is, BigInteger &num);
-    std::ostream &operator<<(std::ostream &os, const BigInteger &num);
+    std::ostream &operator<<(std::ostream &os, BigInteger const& num);
 
 }
 
-    #endif
+#endif
