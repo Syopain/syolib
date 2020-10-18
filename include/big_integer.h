@@ -6,7 +6,7 @@
 
 namespace syo {
 
-    class BigInteger{
+    class BigInteger {
     public:
         static int const WIDTH = 8;
         static int const BASE = 100000000;

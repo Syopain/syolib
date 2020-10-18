@@ -163,7 +163,7 @@ namespace syo {
         }
     }
 
-    //non-member function:
+    //Non-member function:
 
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const ForwardList<T>& lst)

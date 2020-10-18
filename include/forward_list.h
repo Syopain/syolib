@@ -1,6 +1,5 @@
 ﻿#ifndef FORWARD_LIST_H
 #define FORWARD_LIST_H
-#include <initializer_list>
 #include <string>
 #include <stdexcept>
 #include <memory>
@@ -8,14 +7,16 @@
 
 namespace syo {
 
-    template <typename T> struct ListNode {
+    template <typename T>
+    struct ListNode {
         T data{};
         std::shared_ptr<ListNode> next = nullptr;
         ListNode(const T& data = T{}, std::shared_ptr<ListNode> next = nullptr)
             : data(data), next(next) { }
     };
 
-    template <typename T> class ForwardList {
+    template <typename T>
+    class ForwardList {
     public:
         using size_type = unsigned long long;
         class iterator;
@@ -30,7 +31,9 @@ namespace syo {
         const T& operator[](size_type index) const;
         iterator begin() const { return iterator(head_->next); }
         iterator end() const { return iterator(); }
+        bool empty() const { return begin() == end(); }
         size_type length() const;
+        size_type size() const { return length(); };
         int index_of(const T& value) const;
         iterator insert(iterator pos, const T& value);
         iterator insert_after(iterator pos, const T& value);
@@ -57,19 +60,19 @@ namespace syo {
 
     private:
         std::shared_ptr<ListNode<T>> ptr_;
-        friend class ForwardList;
+        friend class ForwardList<T>;
 /*
         friend bool operator==(const iterator& lhs, const iterator& rhs);
         friend bool operator!=(const iterator& lhs, const iterator& rhs);
 */
     };
 
-    //non-member function:
+    //Non-member function:
 
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const ForwardList<T>& vec);
 
-    //定义在类外无法实例化
+    //error: defined as a non-member function cannot be instantiated
     template <typename T>
     bool operator==(const typename ForwardList<T>::iterator& lhs, const typename ForwardList<T>::iterator& rhs);
     template <typename T>

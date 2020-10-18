@@ -59,41 +59,41 @@ namespace syo {
     template <typename T>
     inline T& Vector<T>::at(size_type index)
     {
-        check(index, "range of out on at()!");
+        check(index, "Vector<>::at(): range of out");
         return p_arr_[index];
     }
 
     template <typename T>
     inline const T& Vector<T>::at(size_type index) const
     {
-        check(index, "range of out on at()!");
+        check(index, "Vector<>::at(): range of out");
         return p_arr_[index];
     }
 
     template <typename T>
     inline T& Vector<T>::front()
     {
-        check(0, "front() on empty Vector!");
+        check(0, "Vector<>::front(): empty vector");
         return p_arr_[0];
     }
 
     template <typename T>
     inline const T& Vector<T>::front() const {
-        check(0, "front() on empty Vector!");
+        check(0, "Vector<>::front(): empty vector");
         return p_arr_[0];
     }
 
     template <typename T>
     inline T& Vector<T>::back()
     {
-        check(0, "back() on empty Vector!");
+        check(0, "Vector<>::back(): empty vector");
         return p_arr_[size_ - 1];
     }
 
     template <typename T>
     inline const T& Vector<T>::back() const
     {
-        check(0, "back() on empty Vector!");
+        check(0, "Vector<>::back(): empty vector");
         return p_arr_[size_ - 1];
     }
 
@@ -107,7 +107,7 @@ namespace syo {
     template <typename T>
     inline void Vector<T>::pop_back()
     {
-        check(0, "pop_back() on empty Vector!");
+        check(0, "Vector::pop_back(): empty vector");
         --size_;
     }
 
@@ -127,10 +127,13 @@ namespace syo {
     template <typename T>
     inline void Vector<T>::remove(size_type index, size_type num)
     {
-        check(num, "remove() on Vector that too small!");
-        size_ -= num;
-        for (auto i = index; i < size(); ++i) {
-            p_arr_[i] = p_arr_[i + num];
+        if (num > 0) {
+            //index + num should be less than or equal to size
+            check(index + num - 1, "Vector<>::remove(): range of out");
+            size_ -= num;
+            for (auto i = index; i < size(); ++i) {
+                p_arr_[i] = p_arr_[i + num];
+            }
         }
     }
 
@@ -178,8 +181,7 @@ namespace syo {
         }
     }
 
-    //non-member function:
-
+    //Non-member function:
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const Vector<T>& vec)
     {

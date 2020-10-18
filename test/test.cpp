@@ -12,6 +12,7 @@ int test_pass = 0;
 void test_vector();
 void test_forward_list();
 void exercise_6();
+void exercise_3();
 
 using namespace std;
 
