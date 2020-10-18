@@ -90,7 +90,6 @@ namespace syo {
     bool operator!=(BigInteger const& lhs, BigInteger const& rhs);
     std::istream &operator>>(std::istream &is, BigInteger &num);
     std::ostream &operator<<(std::ostream &os, BigInteger const& num);
-
 }
 
 #endif

@@ -21,7 +21,6 @@ static void exercise_6_1()
 static void exercise_6_2()
 {
     cout << "Exercise_6_2:" << endl << endl;
-
     syo::Stack<int> order_stack;
     cout << "Order stack: " << endl << endl;
     cout << "After push {10, 4, 5, 4, 7, 2}: ";
@@ -45,7 +44,6 @@ static void exercise_6_2()
     cout << "After remove All 4: ";
     link_stack.removeAll(4);
     cout << link_stack << endl << endl;
-
 }
 
 void exercise_6()

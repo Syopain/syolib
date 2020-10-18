@@ -1,10 +1,10 @@
 ﻿#include <string>
-#include <stack>
 #include <map>
 #include <stdexcept>
 #include <sstream>
 #include <cmath>
 #include <vector>
+#include "stack.h"
 
 namespace syo {
 
@@ -31,7 +31,7 @@ namespace syo {
     std::string toSuffix(std::string const& infix)
     {
         std::string ret;
-        std::stack<char> operator_stack;
+        Stack<char> operator_stack;
         for (auto iter = infix.begin(); iter != infix.end(); ++iter) {
             if (isdigit(*iter) || *iter == '.') {
                 ret += *iter;
@@ -93,14 +93,13 @@ namespace syo {
         }
 
         return ret;
-        std::stack<int> a();
     }
 
     double calculate(std::string const& expr)
     {
         std::string suffix = toSuffix(expr);
         std::istringstream iss(suffix);
-        std::stack<double> result_stack;
+        Stack<double> result_stack;
         double lhs, rhs;
         double number;
         char op;
@@ -111,8 +110,10 @@ namespace syo {
             }
             else {
                 iss >> op >> std::ws;
-                rhs = result_stack.top(); result_stack.pop();
-                lhs = result_stack.top(); result_stack.pop();
+                rhs = result_stack.top();
+                result_stack.pop();
+                lhs = result_stack.top();
+                result_stack.pop();
                 switch (op) {
                     case '+': result_stack.push(lhs + rhs);
                         break;

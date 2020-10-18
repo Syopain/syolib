@@ -4,7 +4,6 @@
 
 namespace syo {
 
-
     BigInteger::BigInteger(std::string const& str)
     {
         long long begin = 0, end = str.length();
