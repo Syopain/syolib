@@ -13,17 +13,17 @@ namespace syo {
         void push(T const& val);
         void pop();
         T top() const;
-        bool empty() const { return elems.empty(); }
-        size_type size() const { return elems.size(); }
+        bool empty() const { return elems_.empty(); }
+        size_type size() const { return elems_.size(); }
 
         //Exercise extension member function:
         void removeAll(T const& val);
     private:
-        CONT elems;
+        CONT elems_;
     };
 
     template <typename T>
-    class Stack<T, syo::ForwardList<T>> {
+    class Stack<T, ForwardList<T>> {
     public:
         using size_type = typename ForwardList<T>::size_type;
 

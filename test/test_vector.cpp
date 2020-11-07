@@ -1,5 +1,5 @@
-﻿#include "vector.h"
-#include "test.hpp"
+﻿#include "test.h"
+#include "vector.h"
 
 using syo::Vector;
 

@@ -4,7 +4,6 @@
 
 namespace syo {
 
-
     template <typename T>
     ForwardList<T>::ForwardList() :
         head_(std::make_shared<ListNode<T>>())
@@ -25,8 +24,8 @@ namespace syo {
     {
         auto p = head_;
         for (size_type i = 0; i < size; ++i) {
-            p->next = std::make_shared<ListNode<T>>(val);
-            p = p->next;
+            p->next_ = std::make_shared<ListNode<T>>(val);
+            p = p->next_;
         }
     }
 
@@ -36,8 +35,8 @@ namespace syo {
     {
         auto p = head_;
         for (const auto& it : il) {
-            p->next = std::make_shared<ListNode<T>>(it);
-            p = p->next;
+            p->next_ = std::make_shared<ListNode<T>>(it);
+            p = p->next_;
         }
     }
 
@@ -98,15 +97,15 @@ namespace syo {
     template <typename T>
     void ForwardList<T>::reverse()
     {
-        auto p = head_->next->next;
+        auto p = head_->next_->next_;
         if (!p) return;
-        head_->next->next = nullptr;
+        head_->next_->next_ = nullptr;
 
         auto next_p = p;
         while (p) {
-            next_p = next_p->next;
-            p->next = head_->next;
-            head_->next = p;
+            next_p = next_p->next_;
+            p->next_ = head_->next_;
+            head_->next_ = p;
             p = next_p;
         }
     }
@@ -115,8 +114,8 @@ namespace syo {
     typename ForwardList<T>::iterator ForwardList<T>::insert(iterator pos, const T& value)
     {
         auto p = head_;
-        while (p->next != pos.ptr_) {
-            p = p->next;
+        while (p->next_ != pos.ptr_) {
+            p = p->next_;
         }
         return insert_after(iterator(p), value);
     }
@@ -126,8 +125,8 @@ namespace syo {
     {
         auto p = std::make_shared<ListNode<T>>(value);
 
-        p->next = pos.ptr_->next;
-        pos.ptr_->next = p;
+        p->next_ = pos.ptr_->next_;
+        pos.ptr_->next_ = p;
         return ++pos;
     }
 
@@ -135,18 +134,18 @@ namespace syo {
     typename ForwardList<T>::iterator ForwardList<T>::erase(iterator pos)
     {
         auto p = head_;
-        while (p->next != pos.ptr_) {
-            p = p->next;
+        while (p->next_ != pos.ptr_) {
+            p = p->next_;
         }
         return erase_after(iterator(p));
     }
     template <typename T>
     typename ForwardList<T>::iterator ForwardList<T>::erase_after(iterator pos)
     {
-        if (pos.ptr_ == nullptr || pos.ptr_->next == nullptr)
+        if (pos.ptr_ == nullptr || pos.ptr_->next_ == nullptr)
             return end();
 
-        pos.ptr_->next = pos.ptr_->next->next;
+        pos.ptr_->next_ = pos.ptr_->next_->next_;
         return ++pos;
     }
 
@@ -156,10 +155,10 @@ namespace syo {
     {
         auto p = head_;
         auto q = from.head_;
-        while (q->next) {
-            p->next = std::make_shared<ListNode<T>>(q->next->data);
-            p = p->next;
-            q = q->next;
+        while (q->next_) {
+            p->next_ = std::make_shared<ListNode<T>>(q->next_->data_);
+            p = p->next_;
+            q = q->next_;
         }
     }
 

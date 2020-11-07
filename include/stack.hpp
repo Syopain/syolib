@@ -7,25 +7,25 @@ namespace syo {
     template <typename T, typename CONT>
     void Stack<T, CONT>::push(T const& val)
     {
-        elems.push_back(val);
+        elems_.push_back(val);
     }
 
     template <typename T, typename CONT>
     void Stack<T, CONT>::pop()
     {
-        if (elems.empty()) {
+        if (elems_.empty()) {
             throw std::out_of_range("Stack<>::pop(): empty stack");
         }
-        elems.pop_back();
+        elems_.pop_back();
     }
 
     template <typename T, typename CONT>
     T Stack<T, CONT>::top() const
     {
-        if (elems.empty()) {
+        if (elems_.empty()) {
             throw std::out_of_range("Stack<>::top(): empty stack");
         }
-        return elems.back();
+        return elems_.back();
     }
 
     template<typename T, typename CONT>

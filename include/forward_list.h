@@ -3,16 +3,21 @@
 #include <string>
 #include <stdexcept>
 #include <memory>
-#include <list>
 
 namespace syo {
 
     template <typename T>
-    struct ListNode {
-        T data{};
-        std::shared_ptr<ListNode> next = nullptr;
+    class ForwardList;
+
+    template <typename T>
+    class ListNode {
+    public:
         ListNode(const T& data = T{}, std::shared_ptr<ListNode> next = nullptr)
-            : data(data), next(next) { }
+            : data_(data), next_(next) { }
+    private:
+        T data_{};
+        std::shared_ptr<ListNode> next_ = nullptr;
+        friend class ForwardList<T>;
     };
 
     template <typename T>
@@ -29,7 +34,7 @@ namespace syo {
 
         T& operator[](size_type index);
         const T& operator[](size_type index) const;
-        iterator begin() const { return iterator(head_->next); }
+        iterator begin() const { return iterator(head_->next_); }
         iterator end() const { return iterator(); }
         bool empty() const { return begin() == end(); }
         size_type length() const;
@@ -51,9 +56,9 @@ namespace syo {
     template <typename T> class ForwardList<T>::iterator {
     public:
         iterator(std::shared_ptr<ListNode<T>> ptr = nullptr) : ptr_(ptr) { }
-        T& operator*() const { return ptr_->data; }
+        T& operator*() const { return ptr_->data_; }
         T* operator->() const {return & this->operator*(); }
-        iterator& operator++() { ptr_ = ptr_->next; return *this; }
+        iterator& operator++() { ptr_ = ptr_->next_; return *this; }
         iterator operator++(int) { auto ret = *this; ++*this; return ret; }
         bool operator==(const iterator& rhs) { return ptr_ == rhs.ptr_; }
         bool operator!=(const iterator& rhs) { return ptr_ != rhs.ptr_; }

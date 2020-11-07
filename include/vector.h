@@ -6,7 +6,8 @@
 
 namespace syo {
 
-    template <typename T> class Vector {
+    template <typename T>
+    class Vector {
     public:
         using size_type = unsigned long long;
         static const size_type MINSIZE = 16;

@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include "vector.h"
 #include "forward_list.h"
-#include "test.hpp"
-
-using namespace syo;
+#include "binary_tree.h"
+#include "test.h"
+#include "exercise/exercise.h"
 
 int main_ret = 0;
 int test_count = 0;
@@ -11,19 +11,24 @@ int test_pass = 0;
 
 void test_vector();
 void test_forward_list();
-void exercise_6();
-void exercise_3();
+void test_binary_tree();
 
-using namespace std;
+void exercise_10();
+
+static void test()
+{
+    test_vector();
+    test_forward_list();
+    test_binary_tree();
+}
 
 int main()
 {
     //system("chcp 65001");
-    test_vector();
-    test_forward_list();
+    test();
 
-    exercise_6();
-
+    exercise_10();
     printf("test: %d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
+    getchar();
     return main_ret;
 }
