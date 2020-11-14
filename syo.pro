@@ -13,6 +13,7 @@ SOURCES += \
         exercise/exercise_04.cpp \
         exercise/exercise_06.cpp \
         exercise/exercise_10.cpp \
+        exercise/exercise_11.cpp \
         source/big_integer.cpp \
         source/calculate.cpp \
         test/test.cpp \

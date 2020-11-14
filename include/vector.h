@@ -43,8 +43,8 @@ namespace syo {
         void reserve( size_type size);
 
         //Exercise extension member function:
-        void insert_in_order(const T& val);   //将value插入到第一个大于它的元素之前
-        void sort_by_sign();    //将所有负数元素移到所有正数元素之前
+        void insertInOrder(const T& val);   //将value插入到第一个大于它的元素之前
+        void sortBySign();    //将所有负数元素移到所有正数元素之前
 
     private:
         T* p_arr_ = nullptr;

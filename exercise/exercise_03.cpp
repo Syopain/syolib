@@ -14,27 +14,27 @@ static void exercise_3_1()
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 10: \n";
-    ivec.insert_in_order(10);
+    ivec.insertInOrder(10);
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 3: \n";
-    ivec.insert_in_order(3);
+    ivec.insertInOrder(3);
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 7: \n";
-    ivec.insert_in_order(7);
+    ivec.insertInOrder(7);
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 1: \n";
-    ivec.insert_in_order(1);
+    ivec.insertInOrder(1);
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 5: \n";
-    ivec.insert_in_order(5);
+    ivec.insertInOrder(5);
     cout << "Array List: " << ivec << endl << endl;
 
     cout << "Insert 4: \n";
-    ivec.insert_in_order(4);
+    ivec.insertInOrder(4);
     cout << "Array List: " << ivec << endl << endl;
 }
 
@@ -48,7 +48,7 @@ static void exercise_3_2()
     Vector<int> ivec = {1, -1, 3, 4, -3, 5, -6, -2, 9, -3};
     cout << "Original ArrayList: \n" << ivec << endl << endl;
 
-    ivec.sort_by_sign();
+    ivec.sortBySign();
     cout << "Called sort_by_sign(): \n" << ivec << endl << endl;
 
 }

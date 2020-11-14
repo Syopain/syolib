@@ -6,5 +6,6 @@ void exercise_3();
 void exercise_4();
 void exercise_6();
 void exercise_10();
+void exercise_11();
 
 #endif // EXERCISE_H

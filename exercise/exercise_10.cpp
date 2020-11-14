@@ -19,7 +19,7 @@ static void exercise_10_1()
     F.setRight('I');
 
     cout << "Print the tree:" << endl;
-    tree.print();
+    tree.printVertical();
     cout << endl;
     cout << "ProOrderTraversal:  ";
     tree.preOrderTraversal([](char c){ cout << c << ' '; });
@@ -46,7 +46,7 @@ static void exercise_10_2()
     F.setRight('I');
 
     cout << "Print the tree:" << endl;
-    tree.print();
+    tree.printVertical();
     cout << endl;
 
     auto nodeNum = tree.nodeNum();

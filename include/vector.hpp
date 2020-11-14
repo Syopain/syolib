@@ -158,7 +158,7 @@ namespace syo {
     }
 
     template<typename T>
-    void Vector<T>::insert_in_order(const T& val)
+    void Vector<T>::insertInOrder(const T& val)
     {
         size_type index = 0;
         while (index != size() && p_arr_[index] < val) {
@@ -168,7 +168,7 @@ namespace syo {
     }
 
     template<typename T>
-    void Vector<T>::sort_by_sign()
+    void Vector<T>::sortBySign()
     {
         T* left = p_arr_;
         T* right = p_arr_ + size() - 1;

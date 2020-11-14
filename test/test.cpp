@@ -13,8 +13,6 @@ void test_vector();
 void test_forward_list();
 void test_binary_tree();
 
-void exercise_10();
-
 static void test()
 {
     test_vector();
@@ -24,10 +22,10 @@ static void test()
 
 int main()
 {
-    //system("chcp 65001");
+    system("chcp 65001");
     test();
 
-    exercise_10();
+    exercise_11();
     printf("test: %d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     getchar();
     return main_ret;

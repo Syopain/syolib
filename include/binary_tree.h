@@ -17,7 +17,7 @@ namespace syo {
         using pNode = std::shared_ptr<BinaryTreeNode<T>>;
         BinaryTreeNode(T const& data = T{}, pNode left = nullptr, pNode right = nullptr);
     private:
-        T data_{};
+        T data_;
         pNode left_;
         pNode right_;
 
@@ -43,7 +43,10 @@ namespace syo {
         void levelOrderTraversal(std::function<void (T&)> func);
         size_t nodeNum() const;
         size_t height() const;
-        void print(size_t space = 0) const;
+        void printVertical(size_t d = 0, size_t h = 0, size_t space = 0) const;
+        void printHorizontal() const;
+        void printWireframe() const;
+        void printIndex() const;
 
     private:
         pNode root_;
