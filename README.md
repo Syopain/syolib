@@ -16,3 +16,4 @@
 - `BigInteger`
 - `Stack<T>`
 - `BinaryTree<T>`
+- `Polynomial`
