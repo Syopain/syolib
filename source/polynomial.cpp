@@ -1,4 +1,5 @@
 #include "polynomial.h"
+#include <cmath>
 
 namespace syo {
 
@@ -12,7 +13,6 @@ namespace syo {
         terms.insert(std::make_pair(exponent, coefficient));
     }
 
-
     Polynomial &Polynomial::operator+=(const Polynomial &rhs)
     {
         for (auto const& iter : rhs.terms) {
@@ -23,6 +23,9 @@ namespace syo {
 
     Polynomial &Polynomial::operator*=(const Polynomial &rhs)
     {
+        if (this == &rhs)	// It's necessary
+            return *this *= Polynomial(rhs);
+
         Polynomial lhs = *this;
         clear();
         for (auto const& l : lhs.terms) {
@@ -47,6 +50,32 @@ namespace syo {
         return product;
     }
 
+    double Polynomial::evaluate(double x) const
+    {
+        double result = 0;
+        for (auto const& term : terms) {
+            result += term.second * std::pow(x, term.first);
+        }
+        return result;
+    }
+
+    Polynomial pow(const Polynomial &base, int exponent)
+    {
+        if (exponent < 0)
+            std::cerr << "exponent cannot be less than 0" << std::endl;
+        if (exponent == 0)
+            return Polynomial(1, 0);
+        if (exponent == 1)
+            return base;
+
+        Polynomial result = pow(base, exponent/2);
+        result *= result;
+        if (exponent & 1)
+            result *= base;
+
+        return result;
+    }
+
     std::ostream& operator<<(std::ostream& os, Polynomial const& poly)
     {
         auto crbegin = poly.terms.crbegin();
@@ -55,7 +84,7 @@ namespace syo {
             if (r_iter->second == 0)
                 continue;
             os << (r_iter->second > 0 ? (r_iter != crbegin ? "+ " : "") : "- ");
-            if (std::abs(r_iter->second) != 1) {
+            if (std::abs(r_iter->second) != 1 || r_iter->first == 0) {
                 os << std::abs(r_iter->second);
             }
             if (r_iter->first != 0) {

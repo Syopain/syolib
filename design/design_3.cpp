@@ -1,6 +1,5 @@
 #include "algorithm.h"
 
-
 static void design_3_1()
 {
     std::cout << "Design_3_1\n" << std::endl;

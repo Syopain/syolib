@@ -25,6 +25,7 @@ namespace syo {
 
     void print_permutation(int s[], int n);
     void print_combination(int n, int r);
+    void print_yh_triangle(int row);
 }
 
 #endif // ALGORITHM_H

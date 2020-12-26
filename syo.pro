@@ -11,6 +11,7 @@ SOURCES += \
         design/design_1.cpp \
         design/design_2.cpp \
         design/design_3.cpp \
+        design/design_4.cpp \
         exercise/exercise_02.cpp \
         exercise/exercise_03.cpp \
         exercise/exercise_04.cpp \

@@ -13,6 +13,7 @@ namespace syo {
         Polynomial& operator+=(Polynomial const& rhs);
         Polynomial &operator*=(Polynomial const& rhs);
         void clear() { terms.clear(); }
+        double evaluate(double x) const;
     private:
         std::map<int, double> terms;
 
@@ -24,6 +25,7 @@ namespace syo {
     //Non-member function:
     Polynomial operator+(Polynomial const& lhs, Polynomial const& rhs);
     Polynomial operator*(Polynomial const& lhs, Polynomial const& rhs);
+    Polynomial pow(Polynomial const& base, int exponent);
     std::ostream& operator<<(std::ostream& os, Polynomial const& poly);
 }
 

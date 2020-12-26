@@ -76,4 +76,33 @@ namespace syo {
         print_permutation(arr, s, n, 0);
         delete[] arr;
     }
+
+    void print_yh_triangle(int row)
+    {
+        if (row > 0)
+            std::cout << "i = 0" << std::string(3 * row, ' ') << "  1" << std::endl;
+        if (row > 1)
+            std::cout << "i = 1" << std::string(3 * (row - 1), ' ') << "  1     1" << std::endl;
+        else
+            return;
+
+        int* arr = new int[row * (1+row) / 2]();
+        arr[0] = arr[1] = 1;
+        int p = 2;
+        int q;
+        while (p < row) {
+            arr[p] = 1;
+            for (q = p - 1; q > 0; --q) {
+                arr[q] += arr[q-1];
+            }
+            std::cout << "i = " << p << std::string(3*(row-p), ' ');
+            for (int i = 0; i < p+1; ++i) {
+                //std::cout << arr[i] << "   ";
+                printf("%3d   ", arr[i]);
+            }
+            std::cout << std::endl;
+            ++p;
+        }
+        delete[] arr;
+    }
 }
