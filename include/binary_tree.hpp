@@ -1,4 +1,4 @@
-ï»¿#ifndef BINARY_TREE_HPP
+#ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 #include <cmath>
 #include <queue>
@@ -223,15 +223,15 @@ namespace syo {
             }
 
             if (iter->first % 2) {
-                frame_buf << " â”Œâ”€";
+                frame_buf << " ©°©¤";
                 node_buf << " " << iter->second->data_ << " ";
                 ++col;
                 for (int i = 0; i < step / 2 - 1; ++i) {
-                    frame_buf << "â”€â”€â”€";
+                    frame_buf << "©¤©¤©¤";
                     node_buf << "   ";
                     ++col;
                 }
-                frame_buf << (all_nodes.find(iter->first + 1) == all_nodes.end() ? "â”€â”˜ " : "â”€â”´â”€");
+                frame_buf << (all_nodes.find(iter->first + 1) == all_nodes.end() ? "©¤©¼ " : "©¤©Ø©¤");
                 node_buf << "   ";
                 ++col;
             }
@@ -242,17 +242,17 @@ namespace syo {
                         node_buf << "   ";
                         ++col;
                     }
-                    frame_buf << " â””â”€";
+                    frame_buf << " ©¸©¤";
                     node_buf << "   ";
                     ++col;
                 }
 
                 for (int i = 0; i < step / 2 - 1; ++i) {
-                    frame_buf << "â”€â”€â”€";
+                    frame_buf << "©¤©¤©¤";
                     node_buf << "   ";
                     ++col;
                 }
-                frame_buf << "â”€â” ";
+                frame_buf << "©¤©´ ";
                 node_buf << " " << iter->second->data_ << " ";
                 ++col;
             }

@@ -18,4 +18,8 @@ extern int test_pass;
         }\
     } while(0)
 
+void test_vector();
+void test_forward_list();
+void test_binary_tree();
+
 #endif // TEST_HPP
