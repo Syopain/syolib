@@ -7,7 +7,7 @@
 namespace syo {
 
     class BigInteger {
-    public:
+        private:
         static int const WIDTH = 8;
         static int const BASE = 100000000;
         std::vector<long long> number;

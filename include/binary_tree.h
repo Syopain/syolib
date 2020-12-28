@@ -17,7 +17,7 @@ namespace syo {
         using pNode = std::shared_ptr<BinaryTreeNode<T>>;
         BinaryTreeNode(T const& data = T{}, pNode left = nullptr, pNode right = nullptr);
     private:
-        T data_;
+        T data_{};
         pNode left_;
         pNode right_;
 

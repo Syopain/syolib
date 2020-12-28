@@ -105,4 +105,5 @@ namespace syo {
         }
         delete[] arr;
     }
+
 }

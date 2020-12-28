@@ -10,44 +10,101 @@ namespace syo {
 
     Polynomial::Polynomial(double coefficient, int exponent)
     {
-        terms.insert(std::make_pair(exponent, coefficient));
+        if (coefficient)
+            terms.insert(std::make_pair(exponent, coefficient));
+    }
+
+    Polynomial::Polynomial(const std::pair<int, double> &term)
+    {
+        if (term.first)
+            terms.insert(term);
     }
 
     Polynomial &Polynomial::operator+=(const Polynomial &rhs)
     {
         for (auto const& iter : rhs.terms) {
             terms[iter.first] += iter.second;
-        }
-        return *this;
-    }
-
-    Polynomial &Polynomial::operator*=(const Polynomial &rhs)
-    {
-        if (this == &rhs)	// It's necessary
-            return *this *= Polynomial(rhs);
-
-        Polynomial lhs = *this;
-        clear();
-        for (auto const& l : lhs.terms) {
-            for (auto const& r : rhs.terms) {
-                *this += Polynomial(l.second * r.second, l.first + r.first);
+            if (terms[iter.first] == 0) {
+                terms.erase(iter.first);
             }
         }
         return *this;
     }
 
+    Polynomial &Polynomial::operator-=(const Polynomial &rhs)
+    {
+        return *this += (-rhs);
+    }
+
+    Polynomial &Polynomial::operator*=(const Polynomial &rhs)
+    {
+        return *this = *this * rhs;
+    }
+
+    Polynomial &Polynomial::operator/=(const Polynomial &rhs)
+    {
+        return *this = *this / rhs;
+    }
+
+    Polynomial &Polynomial::operator%=(const Polynomial &rhs)
+    {
+        return *this -= *this / rhs * rhs;
+    }
+
     Polynomial operator+(Polynomial const& lhs, Polynomial const& rhs)
     {
-        Polynomial sum = lhs;
-        sum += rhs;
-        return sum;
+        Polynomial result = lhs;
+        result += rhs;
+        return result;
     }
 
     Polynomial operator*(Polynomial const& lhs, Polynomial const& rhs)
     {
-        Polynomial product = lhs;
-        product *= rhs;
-        return product;
+        Polynomial result;
+        for (auto const& l : lhs.terms) {
+            for (auto const& r : rhs.terms) {
+                result += Polynomial(l.second * r.second, l.first + r.first);
+            }
+        }
+
+        return result;
+    }
+
+    Polynomial operator-(Polynomial const& lhs, Polynomial const& rhs)
+    {
+        return lhs + (-rhs);
+    }
+
+    Polynomial operator+(Polynomial const& rhs)
+    {
+        return rhs;
+    }
+
+    Polynomial operator-(Polynomial const& rhs)
+    {
+        Polynomial result = rhs;
+        for (auto& i : result.terms) {
+            i.second = -i.second;
+        }
+        return result;
+    }
+
+    Polynomial operator/(Polynomial const& lhs, Polynomial const& rhs)
+    {
+        if ((lhs.terms.crbegin()->first) < (rhs.terms.crbegin()->first)) {
+            return Polynomial();
+        }
+        Polynomial result = Polynomial(lhs.terms.crbegin()->second / rhs.terms.crbegin()->second,
+                                       lhs.terms.crbegin()->first - rhs.terms.crbegin()->first);
+
+        return result + (lhs - result * rhs) / rhs;
+    }
+
+    Polynomial operator%(Polynomial const& lhs, Polynomial const& rhs)
+    {
+        Polynomial result = lhs;
+        result %= rhs;
+        return result;
     }
 
     double Polynomial::evaluate(double x) const
@@ -58,6 +115,7 @@ namespace syo {
         }
         return result;
     }
+
 
     Polynomial pow(const Polynomial &base, int exponent)
     {
@@ -78,6 +136,9 @@ namespace syo {
 
     std::ostream& operator<<(std::ostream& os, Polynomial const& poly)
     {
+        if (poly.terms.size() == 0){
+            return os << 0;
+        }
         auto crbegin = poly.terms.crbegin();
         auto crend = poly.terms.crend();
         for (auto r_iter = crbegin; r_iter != crend; ++r_iter) {

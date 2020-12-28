@@ -1,7 +1,6 @@
 ﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
 #include <string>
-#include "vector.h"
 #include <iostream>
 
 namespace syo {
