@@ -51,14 +51,14 @@ namespace syo {
         return *this -= *this / rhs * rhs;
     }
 
-    Polynomial operator+(Polynomial const& lhs, Polynomial const& rhs)
+    const Polynomial operator+(Polynomial const& lhs, Polynomial const& rhs)
     {
         Polynomial result = lhs;
         result += rhs;
         return result;
     }
 
-    Polynomial operator*(Polynomial const& lhs, Polynomial const& rhs)
+    const Polynomial operator*(Polynomial const& lhs, Polynomial const& rhs)
     {
         Polynomial result;
         for (auto const& l : lhs.terms) {
@@ -70,17 +70,17 @@ namespace syo {
         return result;
     }
 
-    Polynomial operator-(Polynomial const& lhs, Polynomial const& rhs)
+    const Polynomial operator-(Polynomial const& lhs, Polynomial const& rhs)
     {
         return lhs + (-rhs);
     }
 
-    Polynomial operator+(Polynomial const& rhs)
+    const Polynomial operator+(Polynomial const& rhs)
     {
         return rhs;
     }
 
-    Polynomial operator-(Polynomial const& rhs)
+    const Polynomial operator-(Polynomial const& rhs)
     {
         Polynomial result = rhs;
         for (auto& i : result.terms) {
@@ -89,7 +89,7 @@ namespace syo {
         return result;
     }
 
-    Polynomial operator/(Polynomial const& lhs, Polynomial const& rhs)
+    const Polynomial operator/(Polynomial const& lhs, Polynomial const& rhs)
     {
         if ((lhs.terms.crbegin()->first) < (rhs.terms.crbegin()->first)) {
             return Polynomial();
@@ -100,7 +100,7 @@ namespace syo {
         return result + (lhs - result * rhs) / rhs;
     }
 
-    Polynomial operator%(Polynomial const& lhs, Polynomial const& rhs)
+    const Polynomial operator%(Polynomial const& lhs, Polynomial const& rhs)
     {
         Polynomial result = lhs;
         result %= rhs;
@@ -117,7 +117,7 @@ namespace syo {
     }
 
 
-    Polynomial pow(const Polynomial &base, int exponent)
+    const Polynomial pow(const Polynomial &base, int exponent)
     {
         if (exponent < 0)
             std::cerr << "exponent cannot be less than 0" << std::endl;
@@ -159,4 +159,3 @@ namespace syo {
     }
 
 }
-

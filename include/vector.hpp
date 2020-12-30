@@ -5,16 +5,24 @@
 namespace syo {
 
     template <typename T>
+    Vector<T>::Vector(size_type size) :
+        size_(size),
+        capacity_(size)
+    {
+        if (size > 0)
+            p_arr_ = new T[capacity_] {};
+    }
+
+    template <typename T>
     Vector<T>::Vector(size_type size, const T& val) :
         size_(size),
         capacity_(size)
     {
         if (size > 0) {
             p_arr_ = new T[capacity_] {};
-            if(val != T{})
-                for(size_type i = 0; i < size_; ++i) {
-                    p_arr_[i] = val;
-                }
+            for(size_type i = 0; i < size_; ++i) {
+                p_arr_[i] = val;
+            }
         }
     }
 

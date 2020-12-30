@@ -15,7 +15,8 @@ namespace syo {
 
         Vector() = default;
         Vector(const Vector<T>& from);
-        Vector(size_type size, const T& val = T{});
+        Vector(size_type size);
+        Vector(size_type size, const T& val);
         Vector(std::initializer_list<T> il);
         Vector& operator=(const Vector& from);
         ~Vector();

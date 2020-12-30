@@ -1,5 +1,5 @@
 #include "algorithm.h"
-#include <vector>
+#include "vector.h"
 
 namespace syo {
 
@@ -111,7 +111,7 @@ namespace syo {
     {
         int max_len = 0;
         int end_pos = 0;
-        std::vector<std::vector<int>> dp(str1.length(), std::vector<int>(str2.length()));
+        syo::Vector<syo::Vector<int>> dp(str1.length(), syo::Vector<int>(str2.length()));
         for (size_t i = 0; i < dp.size(); ++i) {
             for (size_t j = 0; j < dp[i].size(); ++j) {
                 if (str1[i] == str2[j]) {
