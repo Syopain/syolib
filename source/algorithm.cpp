@@ -1,4 +1,5 @@
 #include "algorithm.h"
+#include <vector>
 
 namespace syo {
 
@@ -104,6 +105,25 @@ namespace syo {
             ++p;
         }
         delete[] arr;
+    }
+
+    std::string lcstring(std::string const& str1, std::string const& str2)
+    {
+        int max_len = 0;
+        int end_pos = 0;
+        std::vector<std::vector<int>> dp(str1.length(), std::vector<int>(str2.length()));
+        for (size_t i = 0; i < dp.size(); ++i) {
+            for (size_t j = 0; j < dp[i].size(); ++j) {
+                if (str1[i] == str2[j]) {
+                    dp[i][j] = (i > 0 && j > 0) ? (dp[i-1][j-1] + 1) : 1;
+                    if (dp[i][j] > max_len) {
+                        max_len = dp[i][j];
+                        end_pos = i + 1;
+                    }
+                }
+            }
+        }
+        return str1.substr(end_pos - max_len, max_len);
     }
 
 }
